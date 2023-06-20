@@ -1,32 +1,26 @@
 import express from "express";
 import {
-    deleteuser,
   getalluser,
   newuser,
-  specialuserid,
-  updateuser,
-  userid,
+  getUserProfile,
+  userlogin,
+  userlogout,
 } from "../controllers/users.js";
+import { isAuthenticated } from "../middlewares/auth.js";
 
 const router = express.Router();
 
 //GET
-router.get("/all", getalluser);
+router.get("/api/v1/all", getalluser);
 
-router.get("/userid/special", specialuserid);
+router.get("/api/v1/logout", userlogout);
 
 //POST
-router.post("/new", newuser);
+router.post("/api/v1/new", newuser);
+
+router.post("/api/v1/login", userlogin);
 
 //Dynamic Route
-router.get("/userid/:id", userid);
-
-//POST
-router.put("/userid/:id", updateuser);
-
-//DELETE
-router.delete("/userid/:id", deleteuser);
-
-
+router.get("/api/v1/me", isAuthenticated, getUserProfile);
 
 export default router;
