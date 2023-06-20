@@ -84,3 +84,14 @@ export const userlogout = (req, res, next) => {
     next(error);
   }
 };
+
+export const nice=(req,res)=>{
+  try {
+    return res.status(201).json({
+      success:true,
+    })
+  } catch (error) {
+    console.log(error)
+  }
+   
+}
